@@ -1,6 +1,6 @@
 # 安装kubernetes集群
 
-本文档使用centos7.2009作为基础操作系统，使用kubeadm为安装工具。可以使用本文档逐步操作安装kubernetes集群，也可使用自动化安装脚本[autoinstall.sh](autoinstall.md)来快速安装。
+本文档使用centos7.2009作为基础操作系统，使用kubeadm为安装工具。可以使用本文档逐步操作安装kubernetes集群，也可使用自动化安装脚本[install.sh](scripts/readme.md)来快速安装。
 
 安装不同配置的集群需要不同的节点数，每节点CPU核心不低于2，内存不少于2GB，至多需要9个节点。
 
