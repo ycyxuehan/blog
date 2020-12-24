@@ -1,2 +1,4 @@
 # blog
-我的博客
+bing的博客
+
+## [kubernetes](kubernetes/readme.md)
