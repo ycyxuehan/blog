@@ -33,6 +33,8 @@ containerd config dump >/etc/containerd/config.toml
     systemd_cgroup = true
     [plugins."io.containerd.grpc.v1.cri".registry]
       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+          endpoint = ["https://pqbap4ya.mirror.aliyuncs.com"]
         [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry.bing89.com"]
           endpoint = ["https://registry.bing89.com"]
       [plugins."io.containerd.grpc.v1.cri".registry.configs]
