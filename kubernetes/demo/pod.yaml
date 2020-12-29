@@ -1,0 +1,13 @@
+kind: Pod
+apiVersion: core/v1
+metadata:
+  name: demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: demo
+        image: registry.bing89.com/tools/demo:1.0
+        ports:
+        - containerPort: 8080
+      restartPolicy: OnFailure

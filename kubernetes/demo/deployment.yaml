@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    version: "1.0"
+spec:
+  selector:
+    matchLabels:
+      app: demo
+      version: "1.0"
+  template:
+    metadata:
+      labels:
+        app: demo
+        version: "1.0"
+    spec:
+      containers:
+      - name: demo
+        image: registry.bing89.com/tools/demo:1.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
