@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-mem-outband
+spec:
+  containers:
+  - name: demo-mem-outband
+    image: registry.bing89.com/tools/demo:1.0
+    ports:
+    - containerPort: 8080
+    resources:
+      limits:
+        memory: 100Gi
+      requests:
+        memory: 64Gi
+    restartPolicy: OnFailure
+#超出限制的pod无法创建。

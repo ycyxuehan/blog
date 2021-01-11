@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-demo
+spec:
+  limits:
+    - default:
+        cpu: 300m
+      defaultRequest:
+        cpu: 100m
+      type: Container

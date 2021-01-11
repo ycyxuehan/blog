@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-extend-resource
+spec:
+  containers:
+  - name: demo-extend-resource
+    image: registry.bing89.com/tools/demo:1.0
+    ports:
+    - containerPort: 8080
+      name: http-port
+    resources:
+      requests:
+        cpu: 50m
+        bing89.com/demo: 1
+      limits:
+        cpu: 100m
+        bing89.com/demo: 1
+  restartPolicy: OnFailure

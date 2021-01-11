@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: demo-mem-limit
+spec:
+  containers:
+  - name: demo-mem-limit
+    image: registry.bing89.com/tools/demo:1.0
+    ports:
+    - containerPort: 8080
+    resource:
+      requests:
+        memory: 16Mi
+      limits:
+        memory: 128Mi
+  restartPolicy: OnFailure
+
