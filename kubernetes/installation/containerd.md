@@ -30,7 +30,16 @@ containerd config dump >/etc/containerd/config.toml
 [plugins]
   [plugins."io.containerd.grpc.v1.cri"]
     sandbox_image = "registry.bing89.com/kubernetes/pause:3.2"
-    systemd_cgroup = true
+    #systemd_cgroup = true 似乎不起作用
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            SystemdCgroup = true
+```
+```bash
+[plugins]
+  [plugins."io.containerd.grpc.v1.cri"]
     [plugins."io.containerd.grpc.v1.cri".registry]
       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
         [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
