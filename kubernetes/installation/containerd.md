@@ -104,7 +104,7 @@ systemctl daemon-reload && systemctl restart containerd
 
 ### 配置critrl
 
-crictl是containerd的管理工具，类似于docker
+crictl是containerd的管理工具，类似于docker-client
 
 ```bash
 cat <<EOF >/etc/crictl.yaml
@@ -113,4 +113,11 @@ image-endpoint: unix:///run/containerd/containerd.sock
 timeout: 10
 debug: false
 EOF
+```
+
+## 使用ctr运行一个容器
+
+```bash
+ctr run --mount type=bind,src=/etc/nginx/nginx.conf,dst=/etc/nginx/nginx.conf,options=rbind:ro --mount type=bind,src=/etc/nginx/conf.d,dst=/etc/nginx/conf.d,options=rbind:ro --memory-limit 1024000000 --net-host -d docker.io/library/nginx:1.9 nginx
+
 ```
