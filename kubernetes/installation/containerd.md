@@ -2,6 +2,8 @@
 
 使用[containerd](https://github.com/containerd/cri)的内置CRI插件作为kubernetes CRI
 
+***注意：本文档仅在1.4.x版本上测试通过***
+
 ## 安装
 
 ```bash
