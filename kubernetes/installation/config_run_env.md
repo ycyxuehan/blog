@@ -83,7 +83,7 @@ firewall-cmd --zone=kubernetes --add-port=2380/tcp --permanent
 ```bash
 swapoff -a && sysctl -w vm.swappiness=0
 #/etc/fstab中swap相关的需要删除，否则会导致重启时kubelet启动失败
-sed -i 's|\(^/dev/mapper/centos-swap.*\)|#\1|' /etc/fstab
+sed -i 's|\(^/dev/mapper/.*-swap.*\)|#\1|' /etc/fstab
 ```
 
 ## 配置系统参数
