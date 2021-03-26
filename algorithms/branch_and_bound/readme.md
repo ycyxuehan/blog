@@ -204,7 +204,7 @@ int main()
     auto branches = branch(matrix, x, y);
     // display(branches, x * y, 7);
     auto plen = finditem(branches, 0, 3);
-    cout << matrix[1][2] << "\t" << plen << endl;
+    cout << matrix[0][3] << "\t" << plen << endl;
     return 0;
 }
 ```
