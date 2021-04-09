@@ -240,6 +240,7 @@ PersistentVolumeClaims|add/update|core|
 Services|add/update/delete|core|
 StorageClasses|add|storage|
 
+详情请参考[eventhandlers](eventhandlers.md)
 
 ## Run()
 
