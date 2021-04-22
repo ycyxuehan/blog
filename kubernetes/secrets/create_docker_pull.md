@@ -1,6 +1,6 @@
-# Secrets
+# 创建Docker镜像下载secret
 
-创建一个镜像下载secrets
+创建一个镜像下载secret
 
 ```bash
  kubectl create secret generic registry-bing89 --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
