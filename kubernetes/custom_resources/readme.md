@@ -392,3 +392,29 @@ type Demo struct {
 ```
 
 **注意这里注释的位置和空行。**
+
+### 多group
+
+初始化
+
+```bash
+PROJECT_DIR=demo #
+GO_MODULE_DOMAIN=crd.io
+OWNER=bing
+CRD_VERSION=v1beta1
+
+
+echo "init crd env"
+kubebuilder init --plugins go/v3 --owner ${OWNER} --repo ${GO_MODULE_DOMAIN} --skip-go-version-check
+echo "open multi group..."
+kubebuilder edit --multigroup
+```
+
+`kubebuilder edit --multigroup` 开启多组支持
+
+创建CRD
+
+```bash
+kubebuilder create api --group group1 --version ${CRD_VERSION} --kind Demo --crd-version ${CRD_VERSION} --controller --resource
+kubebuilder create api --group group2 --version ${CRD_VERSION} --kind Demo --crd-version ${CRD_VERSION} --controller --resource
+```
