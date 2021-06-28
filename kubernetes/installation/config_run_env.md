@@ -6,8 +6,8 @@
 
 ```bash
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
-yum --enablerepo=elrepo-kernel install kernel-ml -y
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
+yum --enablerepo=elrepo-kernel install kernel-lt -y
 sed -i s/saved/0/g /etc/default/grub
 grub2-set-default "$(cat /boot/efi/EFI/centos/grub.cfg |grep menuentry|grep 'menuentry '|head -n 1|awk -F "'" '{print $2}')"
 #查看默认启动版本
