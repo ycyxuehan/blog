@@ -40,6 +40,11 @@ wget https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.0.0-rc.
 chmod +x ${HOME}/go/bin/kubebuilder
 ```
 
+```
+curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)
+chmod +x kubebuilder && mv kubebuilder /usr/local/bin/
+```
+
 #### 使用方法
 
 kubebuilder详细使用方法参见[官方文档](https://book.kubebuilder.io/)

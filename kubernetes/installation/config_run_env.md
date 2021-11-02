@@ -32,8 +32,9 @@ setenforce 0
 为kubernetes创建一个zone
 
 ```bash
-firewall-cmd --new-zone=kubernetes --permanent
-firewall-cmd --zone=kubernetes --add-source=192.168.0.0/24
+firewall-cmd --zone=public --new-service=kubernetes --permanent
+#source是源ip
+firewall-cmd --zone=public --service=kubernetes --add-source=192.168.0.0/24
 ```
 
 kubernetes 使用下表所述端口：
@@ -48,10 +49,10 @@ TCP|入站|10251|kube-scheduler|kube-scheduler 自身
 TCP|入站|10252|kube-controller-manager|kube-controller-manager 自身
 
 ```bash
-firewall-cmd --zone=kubernetes --add-port=6443/tcp --permanent
-firewall-cmd --zone=kubernetes --add-port=10250/tcp --permanent
-firewall-cmd --zone=kubernetes --add-port=10251/tcp --permanent
-firewall-cmd --zone=kubernetes --add-port=10252/tcp --permanent
+firewall-cmd --zone=public --service=kubernetes --add-port=6443/tcp --permanent
+firewall-cmd --zone=public --service=kubernetes --add-port=10250/tcp --permanent
+firewall-cmd --zone=public --service=kubernetes --add-port=10251/tcp --permanent
+firewall-cmd --zone=public --service=kubernetes --add-port=10252/tcp --permanent
 ```
 
 **工作节点**
@@ -62,7 +63,11 @@ TCP|入站|10250|Kubelet API|kubelet 自身、控制平面组件
 TCP|入站|30000-32767|NodePort 服务**|所有组件
 
 ```bash
-firewall-cmd --zone=kubernetes --add-port=10250/tcp --permanent
+firewall-cmd --zone=public --new-service=kubernetes --permanent
+#source是源ip
+firewall-cmd --zone=public --service=kubernetes --add-source=192.168.0.0/24
+
+firewall-cmd --zone=public --service=kubernetes --add-port=10250/tcp --permanent
 ```
 
 **etcd节点**
@@ -72,8 +77,50 @@ firewall-cmd --zone=kubernetes --add-port=10250/tcp --permanent
 TCP|入站|2379-2380|etcd server client API|kube-apiserver, etcd
 
 ```bash
-firewall-cmd --zone=kubernetes --add-port=2379/tcp --permanent
-firewall-cmd --zone=kubernetes --add-port=2380/tcp --permanent
+firewall-cmd --zone=public --new-service=kubernetes --permanent
+#source是源ip
+firewall-cmd --zone=public --service=kubernetes --add-source=192.168.0.0/24
+
+firewall-cmd --zone=public --service=kubernetes --add-port=2379/tcp --permanent
+firewall-cmd --zone=public --service=kubernetes --add-port=2380/tcp --permanent
+```
+
+**添加service到zone**
+
+```bash
+firewall-cmd --zone=public --add-service=kubernetes --permanent
+```
+
+**重新加载配置**
+
+***确保每一步操作都加了参数`--permanent`持久化配置***
+
+```bash
+firewall-cmd --reload
+```
+
+**查看防火墙配置**
+
+```bash
+firewall-cmd --zone=kubernetes --list-all
+```
+
+应该可以看到输出
+
+```bash
+kubernetes (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp4s0
+  sources: 192.168.0.0/24 10.244.0.0/16
+  services:
+  ports: 6443/tcp 10250/tcp 10251/tcp 10252/tcp
+  protocols:
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
 ```
 
 ***也可完全关闭防火墙(`systemctl disable --now firewalld`)，但并不推荐***
@@ -126,6 +173,14 @@ EOF
 HOSTS=(k8smaster1 k8smaster2 k8smaster3 k8snode1 k8snode2 k8snode3)
 ssh-keygen
 for host in ${HOSTS[@]};do ssh-copyid ${host}; done
+```
+
+## 安装tc
+
+***不安装可能会出现`[WARNING FileExisting-tc]: tc not found in system path`***
+
+```bash
+yum install iproute-tc
 ```
 
 ## 配置ipvs内核模块
