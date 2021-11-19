@@ -144,6 +144,9 @@ vm.swappiness=0
 net.ipv4.ip_forward=1
 EOF
 sysctl --system
+#添加，rockylinux8.5 + k8s1.22.4
+modprobe br_netfilter
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 ```
 
 ## 配置hosts

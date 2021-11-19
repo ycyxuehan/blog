@@ -69,6 +69,8 @@ BOOTPROTO="none"
 EOF
 #重启network
 systemctl restart network
+#used in rockylinux 8.5
+nmcli -c reload
 ```
 
 添加cni网络配置
