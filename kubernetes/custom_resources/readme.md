@@ -36,11 +36,13 @@ controller-gen crd --paths=/git/demo/api/... output:dir=/git/demo/crd
 安装
 
 ```bash
-wget https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.0.0-rc.0/kubebuilder_linux_amd64 -O ${HOME}/go/bin/kubebuilder
+wget https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.2.0/kubebuilder_linux_amd64 -O ${HOME}/go/bin/kubebuilder
 chmod +x ${HOME}/go/bin/kubebuilder
-```
 
 ```
+方法2
+
+```bash
 curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)
 chmod +x kubebuilder && mv kubebuilder /usr/local/bin/
 ```
