@@ -21,5 +21,5 @@ TOKEN=$(kubeadm token create)
 添加节点到集群
 
 ```bash
-kubeadm join k8smaster:6443 --token ${TOKEN} --discovery-token-ca-cert-hash ${HASH}
+kubeadm join k8smaster:6443 --token ${TOKEN} --discovery-token-ca-cert-hash sha256:${HASH}
 ```
