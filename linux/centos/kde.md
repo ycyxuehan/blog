@@ -14,6 +14,12 @@ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.r
 dnf install epel-release
 ```
 
+使用国内源
+
+```bash
+sed -e 's!^metalink=!#metalink=!g'     -e 's!^#baseurl=!baseurl=!g'     -e 's!//download\.fedoraproject\.org/pub!//mirrors.tuna.tsinghua.edu.cn!g'     -e 's!http://mirrors!https://mirrors!g'     -i /etc/yum.repos.d/epel.repo
+```
+
 开启epel-extra包
 
 ```bash
