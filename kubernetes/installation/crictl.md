@@ -14,6 +14,23 @@ sudo tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
 rm -f crictl-$VERSION-linux-amd64.tar.gz
 ```
 
+***21-12-09更新，crictl 工具 1.19版(k8s1.23)已经无法兼容containerd 1.4，Redhat8库里面的是1.4无法正常使用，需要安装1.5版本***
+
+添加fedora35源，使用updates安装最新版本的containerd
+
+```bash
+cat <<EOF >/etc/yum.repos.d/fedora.repo
+[fedora]
+name=Fedora 35 - $basearch - aliyun
+#failovermethod=priority
+baseurl=https://mirrors.aliyun.com/fedora/updates/35/Everything/$basearch
+enabled=1
+metadata_expire=7d
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$basearch
+EOF
+```
+
 ## 配置crictl
 
 配置文件位于`/etc/crictl.yaml`
