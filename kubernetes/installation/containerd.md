@@ -12,6 +12,9 @@ yum install -y yum-utils   device-mapper-persistent-data   lvm2
 yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum install -y containerd.io
 ```
+***21-12-09更新，crictl 工具 1.19版(k8s1.23)已经无法兼容containerd 1.4，Redhat8库里面的是1.4无法正常使用，需要安装1.5版本***
+
+
 ## 配置
 
 containerd 的配置文件位于`/etc/containerd/config.toml`，若系统种还没有这个文件，执行以下命令生成
