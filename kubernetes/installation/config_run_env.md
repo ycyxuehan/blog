@@ -136,6 +136,11 @@ sed -i 's|\(^/dev/mapper/.*-swap.*\)|#\1|' /etc/fstab
 ## 配置系统参数
 
 ```bash
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
 iptables -P FORWARD ACCEPT
 cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables=1
@@ -145,7 +150,6 @@ net.ipv4.ip_forward=1
 EOF
 sysctl --system
 #添加，rockylinux8.5 + k8s1.22.4
-modprobe br_netfilter
 echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 ```
 

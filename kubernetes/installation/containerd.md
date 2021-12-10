@@ -8,11 +8,12 @@
 
 ```bash
 #使用aliyun的docker-ce镜像源，方便快速安装最新版containerd
-yum install -y yum-utils   device-mapper-persistent-data   lvm2
-yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum install -y yum-utils device-mapper-persistent-data lvm2 wget
+wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
+sed -i 's+download.docker.com+mirrors.tuna.tsinghua.edu.cn/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+yum makecache fast
 yum install -y containerd.io
 ```
-***21-12-09更新，crictl 工具 1.19版(k8s1.23)已经无法兼容containerd 1.4，Redhat8库里面的是1.4无法正常使用，需要安装1.5版本***
 
 
 ## 配置
@@ -20,7 +21,8 @@ yum install -y containerd.io
 containerd 的配置文件位于`/etc/containerd/config.toml`，若系统种还没有这个文件，执行以下命令生成
 
 ```bash
-containerd config dump >/etc/containerd/config.toml
+sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
 ```
 
 ### 配置 cri
@@ -79,6 +81,7 @@ nmcli connection reload
 添加cni网络配置
 
 ```bash
+ mkdir /etc/cni/net.d -p
 cat <<EOF >/etc/cni/net.d/172-my.conf
 {
     "cniVersion": "0.2.0",
