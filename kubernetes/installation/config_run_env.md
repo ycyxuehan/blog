@@ -135,6 +135,8 @@ sed -i 's|\(^/dev/mapper/.*-swap.*\)|#\1|' /etc/fstab
 
 ## 配置系统参数
 
+配置完成后需要重启
+
 ```bash
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
 overlay
