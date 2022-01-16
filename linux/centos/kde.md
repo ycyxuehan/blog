@@ -18,6 +18,8 @@ dnf install epel-release
 
 ```bash
 sed -e 's!^metalink=!#metalink=!g'     -e 's!^#baseurl=!baseurl=!g'     -e 's!//download\.fedoraproject\.org/pub!//mirrors.tuna.tsinghua.edu.cn!g'     -e 's!http://mirrors!https://mirrors!g'     -i /etc/yum.repos.d/epel.repo
+
+sed -e 's!^metalink=!#metalink=!g'     -e 's!^#baseurl=!baseurl=!g'     -e 's!//download\.example/pub!//mirrors.tuna.tsinghua.edu.cn!g'     -e 's!http://mirrors!https://mirrors!g'     -i /etc/yum.repos.d/epel.repo
 ```
 
 开启epel-extra包

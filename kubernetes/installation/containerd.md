@@ -81,7 +81,7 @@ nmcli connection reload
 添加cni网络配置
 
 ```bash
- mkdir /etc/cni/net.d -p
+mkdir /etc/cni/net.d -p
 cat <<EOF >/etc/cni/net.d/172-my.conf
 {
     "cniVersion": "0.2.0",
