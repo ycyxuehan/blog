@@ -1,0 +1,37 @@
+<domain type='kvm'> 
+    <name>test_ubuntu</name>
+    <memory>4194304</memory>
+    <currentMemory>4194304</currentMemory>
+    <vcpu>2</vcpu>
+    <os> 
+      <type arch='x86_64' machine='pc'>hvm</type>
+      <boot dev='cdrom'/>
+   </os> 
+   <features> 
+     <acpi/> 
+     <apic/> 
+     <pae/> 
+   </features> 
+   <clock offset='localtime'/> 
+   <on_poweroff>destroy</on_poweroff> 
+   <on_reboot>restart</on_reboot>   
+   <on_crash>destroy</on_crash> 
+   <devices> 
+     <emulator>/usr/libexec/qemu-kvm</emulator> 
+     <disk type='file' device='disk'> 
+      <driver name='qemu' type='qcow2'/>
+       <source file='/opt/kvm/volumes/centos7.qcow2'/>
+       <target dev='hda' bus='ide'/> 
+     </disk> 
+     <disk type='file' device='cdrom'> 
+       <source file='/root/soft/CentOS-7-x86_64-Minimal-2009.iso'/>
+       <target dev='hdb' bus='ide'/> 
+     </disk> 
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <mac address="00:16:3e:5d:aa:a8"/>
+    </interface> 
+    <input type='mouse' bus='ps2'/> 
+     <graphics type='vnc' port='5509' autoport='yes' listen = '0.0.0.0' keymap='en-us'/>
+   </devices> 
+</domain> 
